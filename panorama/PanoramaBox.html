@@ -50,36 +50,6 @@
     init();
     animate();
 
-    function loadImgs(imagePath) {
-      // 此处顺序不能打乱,d,l,f,u,r,b
-      const imgList = [
-        `${imagePath}_d.jpg`,
-        `${imagePath}_l.jpg`,
-        `${imagePath}_f.jpg`,
-        `${imagePath}_u.jpg`,
-        `${imagePath}_r.jpg`,
-        `${imagePath}_b.jpg`,
-      ];
-
-      return Promise.all(
-        imgList.map(
-          (val) =>
-            new Promise((resolve, reject) => {
-              new THREE.TextureLoader().load(
-                val,
-                (texture) => {
-                  resolve(
-                    new THREE.MeshBasicMaterial({
-                      map: texture,
-                    })
-                  );
-                }
-              );
-            })
-        )
-      )
-    }
-
     function loadBox() {
       if (!material) {
         const map = new THREE.TextureLoader().load('../imgs/uv_grid_opengl.jpg');

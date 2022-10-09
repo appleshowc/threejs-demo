@@ -49,7 +49,7 @@
     init();
     animate();
 
-    function loadMap(name, type) {
+    function loadCubeMap(name) {
       const imagePath = '../imgs/'
       const imgList = [
         `${imagePath}${name}/posx.jpg`,
@@ -60,19 +60,12 @@
         `${imagePath}${name}/negz.jpg`,
       ];
 
-      if (type === 'cube') {
-        // cube material
-        return new THREE.CubeTextureLoader().load(imgList)
-      }
-
-      // multi material
-      const loader = new THREE.TextureLoader()
-      return imgList.map(t => new THREE.MeshBasicMaterial({ map: loader.load(t) }))
+      return new THREE.CubeTextureLoader().load(imgList);
     }
 
     function loadBox() {
-      const fromCube = loadMap('Storforsen2', 'cube')
-      const toCube = loadMap('Storforsen3', 'cube')
+      const fromCube = loadCubeMap('Storforsen2')
+      const toCube = loadCubeMap('Storforsen3')
       material = new THREE.ShaderMaterial({
         uniforms: {
           fromCube: { type: 'samplerCube', value: fromCube },
